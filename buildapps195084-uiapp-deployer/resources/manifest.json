@@ -1,0 +1,46 @@
+{
+  "sap.app": {
+    "id": "buildapps195084",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.1"
+    },
+    "title": "Complex_CustomerBookings",
+    "crossNavigation": {
+      "inbounds": {
+        "external": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "buildapps195084",
+          "action": "open",
+          "title": "Complex_CustomerBookings"
+        }
+      }
+    }
+  },
+  "sap.flp": {
+    "type": "application",
+    "config": {
+      "target": {
+        "type": "URL",
+        "url": "/buildapps195084.buildapps195084/index.html",
+        "navmode": "inplace",
+        "parameters": {}
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "URL",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "buildapps195084"
+  }
+}

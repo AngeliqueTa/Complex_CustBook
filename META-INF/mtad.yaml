@@ -1,0 +1,58 @@
+_schema-version: "3.2"
+ID: buildapps195084
+description: Complex_CustomerBookings
+version: 1.0.1
+modules:
+- name: buildapps195084-destinations
+  type: com.sap.application.content
+  requires:
+  - name: buildapps195084-html5-apps-repo
+    parameters:
+      service-key:
+        name: buildapps195084-html5-apps-repo-key
+  - name: buildapps195084-destination
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: buildapps195084-html5-apps-repo
+          ServiceInstanceName: buildapps195084-html5-apps-repo
+          ServiceKeyName: buildapps195084-html5-apps-repo-key
+          destinations: '{"builtin-vcf-destination":{"url":"https://749ab945trial.cr1.us10.apps.build.cloud.sap","IASDependencyName":"sap-build-apps-api"},"builtin-user-metering-destination":{"url":"https://metering.us10.apps.build.cloud.sap","IASDependencyName":"sap-build-apps-api"}}'
+          sap.cloud.service: buildapps195084
+          sharedLogin: true
+        existing_destinations_policy: update
+- name: buildapps195084-uiapp-deployer
+  type: com.sap.application.content
+  path: buildapps195084-uiapp-deployer
+  requires:
+  - name: buildapps195084-html5-apps-repo
+    parameters:
+      content-target: true
+resources:
+- name: buildapps195084-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: buildapps195084-destination
+    service-plan: lite
+- name: buildapps195084-html5-apps-repo
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: buildapps195084-html5-apps-repo
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - rm -rf ui-deployer
+    - mkdir ui-deployer
